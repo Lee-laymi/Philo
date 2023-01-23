@@ -6,7 +6,7 @@
 /*   By: skrsirab <skrsirab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:12:44 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/01/21 21:09:34 by skrsirab         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:20:13 by skrsirab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,22 @@ void    ft_check_error(int argc, char **argv)
 		int		j;
 		int		k;
 
-        i = 0;
-		j = 0;
+        i = 1;
 		k = 0;
 
-		if (argc != 4 || argc != 5)
+		if (argc != 4 && argc != 5)
 		{
-			write(2, "Incorrect no of input!\n", 6);
+			write(2, "Incorrect no of input!\n", 22);
 			exit (0);
 		}	
-
-        while (argc[k])
+        while (argv[i])
         {
-			printf("test1\n");
-             while (argv[j][i])
-			{
-				j = 0;
-				printf("test2\n");
-			if (argv[j][i] == '-' && argv[j][i] == '+' && (argv[j][i + 1] < 48
-					|| argv[j][i + 1] > 57))
-				ft_print_error();
-			else if ((argv[j][i] < 48 || argv[j][i] > 57) && argv[j][i] != ' ' \
-					&& argv[j][i] != '-' && argv[j][i] != '+')
-				ft_print_error();
-			j++;
-			printf("test3\n");
-			}
+			j = 0;
+			printf("This is -> [%s]\n", argv[i]);
+            // while (argv[i][j])
+			// {
+			// 	j++;
+			// }
         i++;
         }
 }

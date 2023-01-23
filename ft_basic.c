@@ -6,7 +6,7 @@
 /*   By: skrsirab <skrsirab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:35:38 by ami               #+#    #+#             */
-/*   Updated: 2023/01/21 20:00:14 by skrsirab         ###   ########.fr       */
+/*   Updated: 2023/01/23 23:45:59 by skrsirab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t destsize)
 	return (0);
 }
 
-int	ft_atoi(const char *str, char **num, t_ppar *par)
+int	ft_atoi(const char *str)
 {
 	int			i;
 	int			sign;
