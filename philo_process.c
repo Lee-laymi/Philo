@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   philo_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrsirab <skrsirab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:45:53 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/01/20 23:08:42 by skrsirab         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:38:17 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char * argv[])
+int philo_process(int ac, char *av[])
 {
+    
     int x = 2;
     int pid = fork();
     if (pid == -1)

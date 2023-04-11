@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrsirab <skrsirab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:12:44 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/01/23 21:20:13 by skrsirab         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:11:35 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    ft_check_error(int argc, char **argv)
+void    ft_check_error(int ac, char **av)
 {
      	int     i;
 		int		j;
@@ -20,23 +20,45 @@ void    ft_check_error(int argc, char **argv)
 
         i = 1;
 		k = 0;
-
-		if (argc != 4 && argc != 5)
+		if (ac != 5 && ac != 6)
+			ft_print_error();	
+		while (av[i])
 		{
-			write(2, "Incorrect no of input!\n", 22);
-			exit (0);
-		}	
-        while (argv[i])
-        {
-			j = 0;
-			printf("This is -> [%s]\n", argv[i]);
-            // while (argv[i][j])
-			// {
-			// 	j++;
-			// }
-        i++;
-        }
+			ft_checkdigit(&av[i]);
+			if (ft_atoi(av[i]) > INT_MAX)
+				ft_print_error();
+			i++;
+		}
+		if (ac == 5)
+		{
+			if (ft_atoi(av[1]) <= 0 || ft_atoi(av[2]) < 0|| ft_atoi(av[3]) < 0 || ft_atoi(av[4]) < 0)
+			{
+				printf("Hello check error3\n");
+				printf("av[1]%d\n", ft_atoi(av[1]));
+				printf("av[2]%d\n", ft_atoi(av[2]));
+				printf("av[3]%d\n", ft_atoi(av[3]));
+				printf("av[4]%d\n", ft_atoi(av[4]));
+				//printf("av[5]%d\n", ft_atoi(av[5]));
+				ft_print_error();
+				printf("Hello check error4\n");
+			} 
+		}
+		else if (ac == 6)
+			{
+				if (ft_atoi(av[1]) <= 0 || ft_atoi(av[2]) < 0|| ft_atoi(av[3]) < 0 || ft_atoi(av[4]) < 0 || ft_atoi(av[5]) < 0)
+				{
+					printf("Hello check error5\n");
+					printf("av[1]%d\n", ft_atoi(av[1]));
+					printf("av[2]%d\n", ft_atoi(av[2]));
+					printf("av[3]%d\n", ft_atoi(av[3]));
+					printf("av[4]%d\n", ft_atoi(av[4]));
+					printf("av[5]%d\n", ft_atoi(av[5]));
+					ft_print_error();
+					printf("Hello check error6\n");
+				}
+			}
 }
+
 
 // void    ft_check_argv_error(char **argv, t_ppar *par, int i)
 // {
@@ -47,17 +69,17 @@ void    ft_check_error(int argc, char **argv)
 //     }
 // }
 
-void	ft_free(t_ppar *par)
-{
-	t_ppar	*tmp_par;
+// void	ft_free(t_env *p)
+// {
+// 	t_env	tmp_par;
 
-	while (par)
-	{
-		tmp_par = par;
-		par = par->next;
-		free(tmp_par);
-	}
-}
+// 	while (p->parameter)
+// 	{
+// 		tmp_par = p->parameter;
+// 		p->parameter = p->parameter->next;
+// 		free(tmp_par);
+// 	}
+// }
 
 void	ft_checkdigit(char **num)
 {

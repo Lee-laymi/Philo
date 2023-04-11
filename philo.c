@@ -1,93 +1,147 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: skrsirab <skrsirab@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 15:45:46 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/01/24 01:08:44 by skrsirab         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "philo.h"
 
-# include "philo.h"
-
-int x=0;
-// void*   routine()
-// {
-//     x++;
-//     sleep(2);
-//    // printf("value of x: %d\n", x);
-// }
-
-// void*   routine2()
-// {
-//     x++;
-//     sleep(2);
-//     //printf("value of x: %d\n", x);
-// }
-
-int main(int argc, char* argv[])
+int main(int ac, char *av[])
 {
-    t_philo     *philoso;
-    t_ppar      *par;
-    int         i;
+    t_env       *philoenv;
 
-	par = malloc(sizeof(t_ppar));
-	if (par == NULL)
-		return (0);
-   // ft_check_error(argc, argv);
-/*initialize philo parameter*/
+    ft_check_error(ac, av);
+    philoenv = malloc(sizeof(t_env));
+    if (!philoenv)
+        return (0);
+	create_philo(av, philoenv); /*create thread*/
+    if (create_mutex(philoenv) == 1)
+        return (0);
+	ft_createthread(philoenv);
 
-    inputdata(argv, par);
-    create_philo(philoso, par);
-/*while loop*/
-    while (philoso != NULL)
-    {
-        pthread_create(&philoso->philo, NULL, &routines, &philoso);
-        philoso = philoso->next;
-    }
 /* create Thread & run philo in routines */
-
-    printf(" Hello! \n");
-
 }
 
-void    new_philo(t_philo *philoso, t_ppar *par)
+int     create_mutex(t_env *philoenv)
 {
-    philoso->philo_data = par;
-    philoso->philo = malloc(sizeof(pthread_t));
-    philoso->next = NULL;
+        int     i;
+        t_philo *tmp;
+        
+        i = 0;
+        tmp = philoenv->philo;
+        while (i < philoenv->n_philo)
+        { 
+            if (pthread_mutex_init(&tmp->mutex_fork, NULL) != 0)
+                return (1);
+            tmp = tmp->next;
+            i++;
+        }
+        return (0);
 }
- 
-void    create_philo(t_philo *philoso, t_ppar *par)
-{
-    int     i;
 
-    i = 0;
-    while (i < par->n_philo)
+void    create_philo(char **av, t_env *philoenv)
+{
+        int     i;
+        t_philo *tmp_philo;
+        t_philo *tmp_head;
+
+        i = 1;
+		philoenv->n_philo = ft_atoi(av[1]);
+        philoenv->philo = malloc(sizeof(t_philo));
+        if (!philoenv->philo)
+            return ;
+        tmp_philo = philoenv->philo;
+        tmp_head = philoenv->philo;
+        while (i <= philoenv->n_philo)
+        {
+            tmp_philo->id = i;
+			if (av[5])
+        		tmp_philo->n2eat = ft_atoi(av[5]); /*taa mee*/
+    		else
+        		tmp_philo->n2eat = 0;
+    		tmp_philo->t2die = ft_atoi(av[2]);
+    		tmp_philo->t2eat = ft_atoi(av[3]);
+    		tmp_philo->t2sleep = ft_atoi(av[4]);
+            tmp_philo->next = malloc(sizeof(t_philo));
+            if (!tmp_philo->next)
+                return ;
+            tmp_philo->env = philoenv;
+			tmp_philo = tmp_philo->next;
+            i++;
+        }
+        tmp_philo->next = tmp_head;
+}
+
+void     ft_createthread(t_env *philoenv)
     {
-        philoso = malloc(sizeof(t_philo));
-        new_philo(philoso, par);
-        philoso->id = i + 1;
-        philoso->fork_left = philoso->id - 1;
-        philoso->fork_right = philoso->id % par->n_philo;
-        printf("Philo id ==> %d\n",philoso->id);
-        philoso = philoso->next;
-        // printf("n_philo : %d\n", philoso->n_philo);
-        i++;
+        int     i;
+		t_philo *tmp_thread;
+
+        i = 0; 
+        tmp_thread = philoenv->philo;
+        ft_create_odd(tmp_thread);
+        usleep(50);
+        tmp_thread = philoenv->philo;
+        ft_create_even(tmp_thread);
+        tmp_thread = philoenv->philo;
+        while ( i < philoenv->n_philo)
+        {
+            if(pthread_join(tmp_thread->thread, NULL) != 0)
+                return ;
+            tmp_thread = tmp_thread->next;
+            i++;
+        }
     }
+
+long     ft_getCurrentTime(void)
+{
+        struct timeval currentTime;
+
+        gettimeofday(&currentTime, NULL);
+        return (currentTime.tv_sec * 1000) + (currentTime.tv_usec / 1000);
 }
 
-void    inputdata(char **argv, t_ppar *par)
+void     ft_usleep_gettime(int timestamp)
 {
-    par->t2die = ft_atoi(argv[2]);
-    par->t_eat = ft_atoi(argv[3]);
-    par->t_sleep = ft_atoi(argv[4]);
-    if (argv[5])
-        par->n_eat = ft_atoi(argv[5]); /*taa mee*/
-    else
-        par->n_eat = 0;
-    par->q_fork = malloc(sizeof(pthread_mutex_t) * ft_atoi(argv[1]));
-    par->n_philo = ft_atoi(argv[1]);
+    long    get_timestamp;
+
+    get_timestamp = ft_getCurrentTime();
+    while (ft_getCurrentTime() - get_timestamp < (long) timestamp)
+        usleep(500); 
+}
+
+long    ft_gettime(t_philo *philo)
+{
+    long    t;
+
+    t = ft_getCurrentTime();
+    return(t - (philo->t.tv_sec * 1000) + (philo->t.tv_usec / 1000));
+}
+
+void    ft_create_odd(t_philo *tmp_thread)
+{
+        int         i;
+        t_philo     *tmp1;
+
+        i = 1;
+        tmp1 = tmp_thread;
+        while (i <= tmp_thread->env->n_philo)
+        {
+            if (pthread_create(&(tmp1->thread), NULL, &routines, tmp1) != 0)
+                return ;
+            usleep(5);
+            tmp1 = tmp1->next->next;
+            i = i + 2;
+        }
+}
+
+void    ft_create_even(t_philo *tmp_thread)
+{
+        int         i;
+        t_philo     *tmp2;
+
+        i = 2;
+        tmp2 = tmp_thread->next;
+        while (i < tmp_thread->env->n_philo)
+        {
+            if (pthread_create(&(tmp2->thread), NULL, &routines, tmp2) != 0)
+                return ;
+            usleep(5);
+            tmp2 = tmp2->next->next;
+            i = i + 2;
+        }
 }
