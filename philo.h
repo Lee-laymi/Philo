@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 17:34:54 by skrairab          #+#    #+#             */
-/*   Updated: 2023/04/10 20:12:30 by skrairab         ###   ########.fr       */
+/*   Updated: 2023/04/17 21:49:07 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo_parameter
     int                 t2sleep;
     int                 t2die;
     int                 fork_right; /*friend*/
+    long                cur_t2eat;
     pthread_t           thread;
     pthread_mutex_t     mutex_fork; /*owner*/
     pthread_mutex_t     *print;
@@ -67,9 +68,9 @@ void    ft_check_error(int argc, char **argv);
 void    new_philo(t_env *philoso);
 void    create_philo(char **av, t_env *philoenv);
 void    init_data(char **argv, t_env *p);
-int    ft_forkeat(t_philo  *p);
+void    ft_forkeat(t_philo  *p);
 void    ft_sleep(t_philo   *p);
-void    ft_print(long gettime, char *str, char *color, t_env *p);
+void    ft_print(long gettime, char *str, char *color, t_philo *p);
 void	*routines(void *phi);
 int 	philo_process(int ac, char *av[]);
 int     create_mutex(t_env *philoenv);

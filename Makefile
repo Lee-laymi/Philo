@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: ami <ami@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 17:10:36 by skrairab          #+#    #+#              #
-#    Updated: 2023/03/28 14:11:07 by skrairab         ###   ########.fr        #
+#    Updated: 2023/04/17 20:56:55 by ami              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,12 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CC_FLAGS = -Wall -Wextra -Werror
+CC_FLAGS = -Wall -Wextra -Werror 
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CC_FLAGS) $(OBJS) -o $(NAME) -g
+	@$(CC) $(CC_FLAGS) $(OBJS) -lpthread -o $(NAME) -g 
 
 clean:
 	rm -rf $(OBJS)

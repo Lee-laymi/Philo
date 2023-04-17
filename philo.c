@@ -73,6 +73,7 @@ void     ft_createthread(t_env *philoenv)
 
         i = 0; 
         tmp_thread = philoenv->philo;
+        philoenv->timestamp = ft_getCurrentTime();
         ft_create_odd(tmp_thread);
         usleep(50);
         tmp_thread = philoenv->philo;
@@ -101,7 +102,7 @@ void     ft_usleep_gettime(int timestamp)
 
     get_timestamp = ft_getCurrentTime();
     while (ft_getCurrentTime() - get_timestamp < (long) timestamp)
-        usleep(500); 
+        usleep(50); 
 }
 
 long    ft_gettime(t_philo *philo)
@@ -109,7 +110,7 @@ long    ft_gettime(t_philo *philo)
     long    t;
 
     t = ft_getCurrentTime();
-    return(t - (philo->t.tv_sec * 1000) + (philo->t.tv_usec / 1000));
+    return(t - (philo->env->timestamp));
 }
 
 void    ft_create_odd(t_philo *tmp_thread)
@@ -136,7 +137,7 @@ void    ft_create_even(t_philo *tmp_thread)
 
         i = 2;
         tmp2 = tmp_thread->next;
-        while (i < tmp_thread->env->n_philo)
+        while (i <= tmp_thread->env->n_philo)
         {
             if (pthread_create(&(tmp2->thread), NULL, &routines, tmp2) != 0)
                 return ;
