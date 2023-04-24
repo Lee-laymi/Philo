@@ -49,21 +49,30 @@ void    create_philo(char **av, t_env *philoenv)
         while (i <= philoenv->n_philo)
         {
             tmp_philo->id = i;
-			if (av[5])
-        		tmp_philo->n2eat = ft_atoi(av[5]); /*taa mee*/
-    		else
-        		tmp_philo->n2eat = 0;
-    		tmp_philo->t2die = ft_atoi(av[2]);
-    		tmp_philo->t2eat = ft_atoi(av[3]);
-    		tmp_philo->t2sleep = ft_atoi(av[4]);
-            tmp_philo->next = malloc(sizeof(t_philo));
-            if (!tmp_philo->next)
-                return ;
-            tmp_philo->env = philoenv;
-			tmp_philo = tmp_philo->next;
+            ft_addphilo(tmp_philo, av, philoenv);
+            tmp_philo = tmp_philo->next;
             i++;
         }
-        tmp_philo->next = tmp_head;
+        // if (philoenv->n_philo > 1)
+            tmp_philo->next = tmp_head;
+        // else 
+        //     tmp_philo->next = NULL;
+}
+
+void    ft_addphilo(t_philo *p,char **av, t_env *philoenv)
+{
+        if (av[5])
+        	p->n2eat = ft_atoi(av[5]); /*taa mee*/
+    	else
+        	p->n2eat = 0;
+        p->t2die = ft_atoi(av[2]);
+        p->t2eat = ft_atoi(av[3]);
+        p->t2sleep = ft_atoi(av[4]);
+        p->env = philoenv;
+        p->next = malloc(sizeof(t_philo));
+        if (!p->next)
+            return ;
+        
 }
 
 void     ft_createthread(t_env *philoenv)
@@ -79,6 +88,8 @@ void     ft_createthread(t_env *philoenv)
         tmp_thread = philoenv->philo;
         ft_create_even(tmp_thread);
         tmp_thread = philoenv->philo;
+        if (pthread_create(&(philoenv->checker), NULL, &ft_checkdie, tmp_thread) != 0)
+            return ;
         while ( i < philoenv->n_philo)
         {
             if(pthread_join(tmp_thread->thread, NULL) != 0)
@@ -86,7 +97,24 @@ void     ft_createthread(t_env *philoenv)
             tmp_thread = tmp_thread->next;
             i++;
         }
+        if(pthread_join(philoenv->checker, NULL) != 0)
+            return ;
     }
+
+void*     ft_checkdie(void *p)
+{
+    t_philo   *philo;
+
+    philo = p;
+    while ((ft_getCurrentTime() - (philo->cur_t2eat)) < philo->t2die)
+    {
+        if (philo->env->n_philo > 1)
+            philo = philo->next;
+        usleep(50);
+    }
+    printf("new_env %d\n",philo->id);
+    return (0);
+}
 
 long     ft_getCurrentTime(void)
 {

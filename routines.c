@@ -6,7 +6,7 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:53:40 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/04/17 22:14:08 by ami              ###   ########.fr       */
+/*   Updated: 2023/04/24 22:16:58 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void *routines(void *phi)
 {
-    // t_env *p;
-
-    // p = (t_env *)phi;
     t_philo *p;
 
     p = phi;
@@ -24,33 +21,33 @@ void *routines(void *phi)
     p->cur_t2eat = ft_getCurrentTime();
     while ((ft_getCurrentTime() - (p->cur_t2eat)) < p->t2die)
     {
-        printf(" diff %ld\n", ((ft_getCurrentTime() - (p->cur_t2eat))));
-        printf("cur_t2eat %ld, curtime %ld\n", p->cur_t2eat,ft_getCurrentTime());
-        printf("philo id = %d\n", p->id);
+        // printf(" diff %ld\n", ((ft_getCurrentTime() - (p->cur_t2eat))));
+        // printf("cur_t2eat %ld, curtime %ld\n", p->cur_t2eat,ft_getCurrentTime());
+        // printf("philo id = %d\n", p->id);
         ft_forkeat(p);
         ft_sleep(p);
     }
-    exit(0);
     /*ft_sleep();*/
     /* ft_timpstamp() */
     // ft_print(ft_gettime(p->philo), "is die", BLUEBG, p);
     /* ft_hold_eat() */
 return (0);
-
 }
 
 void    ft_forkeat(t_philo  *p)
 {
-   // if (ft_gettime)
-    pthread_mutex_lock(&p->next->mutex_fork);
-    pthread_mutex_lock(&p->mutex_fork);
-    ft_print(ft_gettime(p),"Fork right" , GREENBG, p);
-    ft_print(ft_gettime(p),"Fork left" , BLUEBG, p);
-    ft_print(ft_gettime(p),  "is eating", CYAN, p);
-    ft_usleep_gettime(p->t2eat);
-    p->cur_t2eat = ft_getCurrentTime();
-    pthread_mutex_unlock(&p->next->mutex_fork);
-    pthread_mutex_unlock(&p->mutex_fork);
+    if (p->env->n_philo > 1)
+    {
+        pthread_mutex_lock(&p->next->mutex_fork);
+        pthread_mutex_lock(&p->mutex_fork);
+        ft_print(ft_gettime(p),"Fork right" , GREENBG, p);
+        ft_print(ft_gettime(p),"Fork left" , BLUEBG, p);
+        ft_print(ft_gettime(p),  "is eating", CYAN, p);
+        ft_usleep_gettime(p->t2eat);
+        p->cur_t2eat = ft_getCurrentTime();
+        pthread_mutex_unlock(&p->next->mutex_fork);
+        pthread_mutex_unlock(&p->mutex_fork);
+    }
 /* print va philo has taken fork + time stamp */
 /* update num of eat */
 }

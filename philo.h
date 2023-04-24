@@ -6,7 +6,7 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 17:34:54 by skrairab          #+#    #+#             */
-/*   Updated: 2023/04/17 21:49:07 by ami              ###   ########.fr       */
+/*   Updated: 2023/04/24 22:53:32 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void    ft_usleep_gettime(int timestamp);
 long    ft_gettime(t_philo *philo);
 void    ft_create_odd(t_philo *tmp_thread);
 void    ft_create_even(t_philo *tmp_thread);
+void*     ft_checkdie(void *env);
+void    ft_addphilo(t_philo *p,char **av, t_env *philoenv);
 
 # define RED "\x1b[31m"
 # define BLUE "\x1b[34m"
