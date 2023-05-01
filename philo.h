@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 17:34:54 by skrairab          #+#    #+#             */
-/*   Updated: 2023/04/24 22:53:32 by ami              ###   ########.fr       */
+/*   Updated: 2023/05/01 15:57:25 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*w_chr(char const *s, char c);
 char	**ft_split(char const *s, char c);
 void    ft_check_error(int argc, char **argv);
 void    new_philo(t_env *philoso);
-void    create_philo(char **av, t_env *philoenv);
+int    create_philo(char **av, t_env *philoenv);
 void    init_data(char **argv, t_env *p);
 void    ft_forkeat(t_philo  *p);
 void    ft_sleep(t_philo   *p);
@@ -74,12 +74,12 @@ void    ft_print(long gettime, char *str, char *color, t_philo *p);
 void	*routines(void *phi);
 int 	philo_process(int ac, char *av[]);
 int     create_mutex(t_env *philoenv);
-void     ft_createthread(t_env *philoenv);
+int     ft_createthread(t_env *philoenv);
 long     ft_getCurrentTime(void);
 void    ft_usleep_gettime(int timestamp);
 long    ft_gettime(t_philo *philo);
-void    ft_create_odd(t_philo *tmp_thread);
-void    ft_create_even(t_philo *tmp_thread);
+int    ft_create_odd(t_philo *tmp_thread);
+int    ft_create_even(t_philo *tmp_thread);
 void*     ft_checkdie(void *env);
 void    ft_addphilo(t_philo *p,char **av, t_env *philoenv);
 

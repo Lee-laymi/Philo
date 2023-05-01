@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:53:40 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/04/24 22:16:58 by ami              ###   ########.fr       */
+/*   Updated: 2023/05/01 16:21:53 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ return (0);
 
 void    ft_forkeat(t_philo  *p)
 {
-    if (p->env->n_philo > 1)
-    {
+    // if (p->env->n_philo > 1)
+    // {
         pthread_mutex_lock(&p->next->mutex_fork);
         pthread_mutex_lock(&p->mutex_fork);
         ft_print(ft_gettime(p),"Fork right" , GREENBG, p);
@@ -47,7 +47,7 @@ void    ft_forkeat(t_philo  *p)
         p->cur_t2eat = ft_getCurrentTime();
         pthread_mutex_unlock(&p->next->mutex_fork);
         pthread_mutex_unlock(&p->mutex_fork);
-    }
+    // }
 /* print va philo has taken fork + time stamp */
 /* update num of eat */
 }
