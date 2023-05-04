@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ami <ami@student.42.fr>                    +#+  +:+       +#+         #
+#    By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 17:10:36 by skrairab          #+#    #+#              #
-#    Updated: 2023/04/17 20:56:55 by ami              ###   ########.fr        #
+#    Updated: 2023/05/04 16:18:07 by skrairab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,10 @@ SRCS = ft_basic.c\
 		philo_process.c\
 		philo.c\
 		routines.c\
+		ft_create_philo.c\
+		ft_createthread.c\
+		ft_time.c\
+		ft_checkdie.c\
 
 NAME = philo
 
@@ -23,12 +27,12 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CC_FLAGS = -Wall -Wextra -Werror 
+CFLAGS =  -fsanitize=address -g #-Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CC_FLAGS) $(OBJS) -lpthread -o $(NAME) -g 
+	@$(CC) $(CFLAGS) $(OBJS) -lpthread -o $(NAME) -g 
 
 clean:
 	rm -rf $(OBJS)
