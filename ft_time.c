@@ -8,13 +8,18 @@ long     ft_getCurrentTime(void)
         return (currentTime.tv_sec * 1000) + (currentTime.tv_usec / 1000);
 }
 
-void     ft_usleep_gettime(int timestamp)
+int     ft_usleep_gettime(int timestamp, t_philo *p)
 {
     long    get_timestamp;
 
     get_timestamp = ft_getCurrentTime();
     while (ft_getCurrentTime() - get_timestamp < (long) timestamp)
-        usleep(50); 
+    {
+        if (p->env->sign == 1)
+        return (1);
+        usleep(700); 
+    }
+    return (0);
 }
 
 long    ft_gettime(t_philo *philo)

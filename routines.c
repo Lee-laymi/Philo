@@ -6,7 +6,7 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:53:40 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/05/05 17:28:34 by skrairab         ###   ########.fr       */
+/*   Updated: 2023/05/06 02:33:36 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ int ft_forkeat(t_philo  *p)
     ft_print(ft_gettime(p),"Fork right" , GREEN, p);
     ft_print(ft_gettime(p),"Fork left" , BLUE, p);
     ft_print(ft_gettime(p),  "is eating", CYAN, p);
-    ft_usleep_gettime(p->t2eat);
+    if (ft_usleep_gettime(p->t2eat, p) == 1)
+        return (1);
     p->n2eat_check = p->n2eat_check + 1;
-    printf("n2eat_check %d == %d\n",p->id, p->n2eat_check);
+    //printf("n2eat_check %d == %d\n",p->id, p->n2eat_check);
     p->cur_t2eat = ft_getCurrentTime();
     pthread_mutex_unlock(&p->next->mutex_fork);
     if (p->env->sign == 1)
@@ -63,7 +64,8 @@ int ft_sleep(t_philo   *p)
     if (p->env->sign == 1)
         return (1);
     ft_print(ft_gettime(p), "is sleeping", WHITE, p);
-    ft_usleep_gettime(p->t2sleep);
+    if (ft_usleep_gettime(p->t2eat, p) == 1)
+        return (1);
     if (p->env->sign == 1)
         return (1);
     ft_print(ft_gettime(p), "is thinking", MAGENTA, p);

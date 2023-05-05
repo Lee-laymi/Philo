@@ -6,29 +6,29 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:45:53 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/03/10 17:38:17 by skrairab         ###   ########.fr       */
+/*   Updated: 2023/05/06 02:13:08 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+// #include "philo.h"
 
-int philo_process(int ac, char *av[])
-{
+// int philo_process(int ac, char *av[])
+// {
     
-    int x = 2;
-    int pid = fork();
-    if (pid == -1)
-        return (1);
+//     int x = 2;
+//     int pid = fork();
+//     if (pid == -1)
+//         return (1);
 
-    if (pid == 0)
-        x++;
+//     if (pid == 0)
+//         x++;
 
-    sleep(2);
-    printf("Value if xL %d\n", x);
-    printf("Process id %d\n", getpid());
-    if (pid != 0)
-    {
-        wait(NULL);
-    }
-    return (0); 
-}
+//     sleep(2);
+//     printf("Value if xL %d\n", x);
+//     printf("Process id %d\n", getpid());
+//     if (pid != 0)
+//     {
+//         wait(NULL);
+//     }
+//     return (0); 
+// }

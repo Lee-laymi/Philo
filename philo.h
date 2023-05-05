@@ -6,7 +6,7 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 17:34:54 by skrairab          #+#    #+#             */
-/*   Updated: 2023/05/04 20:22:15 by skrairab         ###   ########.fr       */
+/*   Updated: 2023/05/06 02:32:47 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int 	philo_process(int ac, char *av[]);
 int     create_mutex(t_env *philoenv);
 int     ft_createthread(t_env *philoenv);
 long     ft_getCurrentTime(void);
-void    ft_usleep_gettime(int timestamp);
+int     ft_usleep_gettime(int timestamp, t_philo *p);
 long    ft_gettime(t_philo *philo);
 int    ft_create_odd(t_philo *tmp_thread);
 int    ft_create_even(t_philo *tmp_thread);
