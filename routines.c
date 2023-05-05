@@ -6,7 +6,7 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:53:40 by skrsirab          #+#    #+#             */
-/*   Updated: 2023/05/04 20:23:51 by skrairab         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:28:34 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int ft_forkeat(t_philo  *p)
     ft_print(ft_gettime(p),  "is eating", CYAN, p);
     ft_usleep_gettime(p->t2eat);
     p->n2eat_check = p->n2eat_check + 1;
-    printf("n2eat_check == %d\n", p->n2eat_check);
+    printf("n2eat_check %d == %d\n",p->id, p->n2eat_check);
     p->cur_t2eat = ft_getCurrentTime();
     pthread_mutex_unlock(&p->next->mutex_fork);
     if (p->env->sign == 1)

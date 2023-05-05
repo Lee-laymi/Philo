@@ -39,7 +39,10 @@ int    ft_create_even(t_philo *tmp_thread)
 void    ft_addphilo(t_philo *p,char **av, t_env *philoenv, int i)
 {
     if (av[5])
+    {
         p->n2eat = ft_atoi(av[5]); /*taa mee*/
+        p->n2eat_check = 0;
+    }
     else
         p->n2eat = 0;
     p->t2die = ft_atoi(av[2]);
@@ -76,7 +79,7 @@ int    create_philo(char **av, t_env *philoenv)
         i++;
     }
     tmp_philo = tmp_head;
-    for (; tmp_philo->next != NULL;)
+    while (tmp_philo->next != NULL)
         tmp_philo = tmp_philo->next;
     tmp_philo->next = tmp_head;
     return (0);
