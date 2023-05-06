@@ -6,14 +6,13 @@
 #    By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 17:10:36 by skrairab          #+#    #+#              #
-#    Updated: 2023/05/04 16:18:07 by skrairab         ###   ########.fr        #
+#    Updated: 2023/05/06 03:28:24 by skrairab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = ft_basic.c\
 		ft_check_error.c\
 		ft_split.c\
-		philo_process.c\
 		philo.c\
 		routines.c\
 		ft_create_philo.c\
@@ -27,7 +26,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS =  -fsanitize=address -g #-Wall -Wextra -Werror
+CFLAGS =  -fsanitize=address -g -Wall -Wextra -Werror
 
 all: $(NAME)
 

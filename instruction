@@ -1,9 +1,0 @@
-check agrument error
-	case1: only number?
-	case2: agrument complete
-	case3: av[1] >= 1
-create mutex
-create thread
-create routien for thread
-unlock mutex
-destroy mutex

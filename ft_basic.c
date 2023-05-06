@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_basic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrsirab <skrsirab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:35:38 by ami               #+#    #+#             */
-/*   Updated: 2023/01/23 23:45:59 by skrsirab         ###   ########.fr       */
+/*   Updated: 2023/05/07 00:52:06 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,12 @@ int	ft_atoi(const char *str)
 			sign = -1;
 	}
 	while (str[i] && ft_isdigit(str[i]))
-	{
-		value *= 10;
-		value += str[i++] - '0';
-	}
+		value = (value * 10) + (str[i++] - '0');
 	value *= sign;
 	if (value < -2147483648 || value > 2147483647)
 	{
 		write(2, "Error\n", 6);
 		exit (0);
 	}
-		//ft_atoi_error(num, par);
 	return ((int)value);
 }
