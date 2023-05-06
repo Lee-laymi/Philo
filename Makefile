@@ -6,7 +6,7 @@
 #    By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 17:10:36 by skrairab          #+#    #+#              #
-#    Updated: 2023/05/06 03:28:24 by skrairab         ###   ########.fr        #
+#    Updated: 2023/05/07 03:06:30 by skrairab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS =  -fsanitize=address -g -Wall -Wextra -Werror
+CFLAGS =   -Wall -Wextra -Werror  -g -fsanitize=address
 
 all: $(NAME)
 

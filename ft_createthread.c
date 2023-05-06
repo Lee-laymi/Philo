@@ -6,43 +6,11 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 03:46:28 by skrairab          #+#    #+#             */
-/*   Updated: 2023/05/07 01:42:16 by skrairab         ###   ########.fr       */
+/*   Updated: 2023/05/07 02:45:15 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// int	ft_createthread(t_env *philoenv)
-// {
-// 	int		i;
-// 	t_philo	*tmp_thread;
-// 	t_philo	*tmp_check;
-
-// 	i = 0;
-// 	tmp_thread = philoenv->philo;
-// 	philoenv->timestamp = ft_getcurrenttime();
-// 	if (ft_create_odd(tmp_thread) != 0)
-// 		return (1);
-// 	usleep(50);
-// 	tmp_thread = philoenv->philo;
-// 	if (ft_create_even(tmp_thread) != 0)
-// 		return (1);
-// 	tmp_check = philoenv->philo;
-// 	if (pthread_create(& (philoenv->checker), NULL, &ft_checkdie, tmp_check) != 0)
-// 		return (1);
-// 	tmp_thread = philoenv->philo;
-// 	while (i < philoenv->n_philo)
-// 	{
-// 		if (pthread_join (tmp_thread->thread, NULL) != 0)
-// 			return (1);
-// 		tmp_thread = tmp_thread->next;
-// 		i++;
-// 	}
-// 	philoenv->unlock_fork = 0;
-// 	if (pthread_join (philoenv->checker, NULL) != 0)
-// 		return (1);
-// 	return (0);
-// }
 
 int	create_mutex(t_env *philoenv)
 {
@@ -106,7 +74,8 @@ int	ft_createthread(t_env *philoenv)
 	if (ft_create_even(tmp_thread) != 0)
 		return (1);
 	tmp_check = philoenv->philo;
-	if (pthread_create(& (philoenv->checker), NULL, &ft_checkdie, tmp_check) != 0)
+	if (pthread_create(& (philoenv->checker), NULL,
+			&ft_checkdie, tmp_check) != 0)
 		return (1);
 	tmp_thread = philoenv->philo;
 	ft_pthreadjoin(philoenv);
@@ -116,8 +85,7 @@ int	ft_createthread(t_env *philoenv)
 	return (0);
 }
 
-
-int		ft_pthreadjoin(t_env *philoenv)
+int	ft_pthreadjoin(t_env *philoenv)
 {
 	int		i;
 	t_philo	*tmp_thread;

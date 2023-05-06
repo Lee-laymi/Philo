@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrairab <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 03:02:15 by skrairab          #+#    #+#             */
-/*   Updated: 2023/05/06 03:09:32 by skrairab         ###   ########.fr       */
+/*   Updated: 2023/05/07 02:39:49 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char *av[])
 	if (philoenv->n_philo == 1)
 	{
 		printf("%s%d ms %d %s\n", BLUE, 0, philoenv->philo->id, "FORK");
+		usleep(1000 * philoenv->philo->t2die);
 		printf("%s%d ms %d %s\n", RED, philoenv->philo->t2die,
 			philoenv->philo->id, "DIE");
 		return (0);

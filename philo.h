@@ -6,7 +6,7 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 17:34:54 by skrairab          #+#    #+#             */
-/*   Updated: 2023/05/07 01:16:37 by skrairab         ###   ########.fr       */
+/*   Updated: 2023/05/07 02:43:34 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@
 
 typedef struct s_philo_parameter
 {
-	int						id;
-	int						t2think;
-	int						t2start;
-	int						t2eat;
-	int						n2eat;
-	int						n2eat_check;
-	int						t2sleep;
-	int						t2die;
-	int						fork_right;
-	long					cur_t2eat;
-	pthread_t				thread;
-	pthread_mutex_t			mutex_fork;
-	pthread_mutex_t			*print;
-	struct s_env			*env;
-	struct timeval			currenttime;
-	struct timeval			t;
+	int								id;
+	int								t2think;
+	int								t2start;
+	int								t2eat;
+	int								n2eat;
+	int								n2eat_check;
+	int								t2sleep;
+	int								t2die;
+	int								fork_right;
+	long							cur_t2eat;
+	pthread_t						thread;
+	pthread_mutex_t					mutex_fork;
+	pthread_mutex_t					*print;
+	struct s_env					*env;
+	struct timeval					currenttime;
+	struct timeval					t;
 	struct s_philo_parameter		*next;
-}								t_philo;
+}									t_philo;
 
 typedef struct s_env
 {
